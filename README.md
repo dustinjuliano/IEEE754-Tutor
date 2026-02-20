@@ -16,6 +16,8 @@ Through nine specialized training modes, users learn to manually encode, decode,
 8. **Precision Impact:** Observe how single bit flips at the least significant bit affect floating-point values via the Machine Epsilon.
 9. **Rounding Modes:** Practice applying IEEE 754 default rounding methods (Round to Nearest, Ties to Even) to infinitely repeating fractions using Guard, Round, and Sticky bits.
 
+**Continuous Learning:** All modes feature continuous loops, presenting a new problem immediately upon completion. Prompts are standardized as direct directives to encourage active recall of the IEEE 754 standard.
+
 *Note: You can press `q` at any prompt to gracefully exit the current context and return to the main menu.*
 
 ## Project Structure

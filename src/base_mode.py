@@ -10,10 +10,11 @@ class BaseMode(ABC):
         pass
         
     @abstractmethod
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         """
         Executes a single interactive round for this mode.
         Should call prompt_input to interact with the user,
-        catch and correctly handle UserQuitException by returning early,
+        handle UserQuitException by returning False,
+        and return True upon successful completion of a round.
         """
         pass

@@ -1,6 +1,6 @@
 import random
 from src.base_mode import BaseMode
-from src.ui import prompt_input, UserQuitException
+from src.ui import prompt_input, clear_screen, UserQuitException
 
 class PrecisionImpactMode(BaseMode):
     """Handles Mode 8: Precision Impact."""
@@ -33,10 +33,11 @@ class PrecisionImpactMode(BaseMode):
             }
         ]
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target = random.choice(self.questions)
         
         try:
+            clear_screen()
             print("-" * 60)
             print("MODE 8: Precision Impact")
             print("-" * 60)
@@ -45,8 +46,7 @@ class PrecisionImpactMode(BaseMode):
             print(f"Modified seq:      {target['mod_seq']}\n")
             
             # Step 1: Direction
-            print("Without calculating the exact value, did the value increase or decrease?")
-            print("(Type '+' or '-')")
+            print("Determine if the value increased or decreased ('+' or '-'):")
             ans_dir = prompt_input("").strip()
             if ans_dir == target['dir']:
                 if ans_dir == "+":
@@ -57,21 +57,18 @@ class PrecisionImpactMode(BaseMode):
                 print(f"Incorrect. It was '{target['dir']}'.\n")
                 
             # Step 2: Epsilon Difference
-            print("What is the value of this 1 bit difference (the Machine Epsilon for this exponent)?")
-            print("(Hint: It is 2^(true exp - 23))")
+            print("Enter the value of the machine epsilon for this exponent:")
             ans_diff = prompt_input("").strip()
             if ans_diff == target['diff']:
                 print(f"Correct. The precision step at this exponent is {target['diff']}.\n")
             else:
                 print(f"Incorrect. It is {target['diff']}.\n")
             
-            r_corr, r_att, r_pct = tracker.get_round_score()
-            c_corr, c_att, c_pct = tracker.get_cumulative_score(tracker.current_mode_id)
-            print(f"Round Score: {r_corr}/{r_att} ({r_pct:.1f}%)")
-            print(f"Cumulative Mode Score: {c_corr}/{c_att} ({c_pct:.1f}%)\n")
+
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             print("\nExiting mode context...\n")
-            return
+            return False

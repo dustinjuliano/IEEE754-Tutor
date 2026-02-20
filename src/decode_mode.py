@@ -23,7 +23,7 @@ class DecodeMode(BaseMode):
         frac = random.choice([0.0, 0.25, 0.5, 0.75, 0.125])
         return sign * (base + frac)
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target_val = self._generate_target()
         
         if self.is_64_bit:
@@ -34,6 +34,7 @@ class DecodeMode(BaseMode):
         gt_s, gt_e, gt_f = extract_fields(binary_str, self.preset)
         
         try:
+            clear_screen()
             print("-" * 60)
             print(f"MODE: {self.mode_name}")
             print("-" * 60)
@@ -41,7 +42,7 @@ class DecodeMode(BaseMode):
             
             # Step 1: Sign
             print("Step 1: Extract Bits")
-            print("What is the Sign Bit (0 or 1)?")
+            print("Enter the sign bit (s):")
             ans_s = prompt_input("")
             if ans_s == str(gt_s):
                 print(f"Correct. ({'Negative' if gt_s == 1 else 'Positive'})\n")
@@ -50,7 +51,7 @@ class DecodeMode(BaseMode):
                 
             # Step 1b: Exponent extraction
             gt_e_bin = f"{gt_e:0{self.preset.e_bits}b}"
-            print(f"What is the Exponent sequence?")
+            print(f"Enter the exponent sequence:")
             ans_e = prompt_input("")
             if ans_e == gt_e_bin:
                 print("Correct.\n")
@@ -59,7 +60,7 @@ class DecodeMode(BaseMode):
                 
             # Step 2: Exponent Value
             print("Step 2: Exponent Value")
-            print(f"What is the decimal value of the biased exponent `{gt_e_bin}`?")
+            print(f"Enter the decimal value of the biased exponent `{gt_e_bin}`:")
             while True:
                 ans_e_dec = prompt_input("")
                 try:
@@ -74,7 +75,7 @@ class DecodeMode(BaseMode):
                 print(f"Incorrect. The value is {gt_e}.\n")
 
             unbiased_e = gt_e - self.preset.bias
-            print(f"What is the unbiased true exponent (bias={self.preset.bias})?")
+            print(f"Enter the unbiased true exponent (bias={self.preset.bias}):")
             while True:
                 ans_ue = prompt_input("")
                 try:
@@ -90,7 +91,7 @@ class DecodeMode(BaseMode):
                 
             # Step 3: Final Value
             print("Step 3: Final Value")
-            print("What is the implicit leading bit (1 or 0, since e is not 0)?")
+            print("Enter the implicit leading bit:")
             # For this simple mock we assume normalized, meaning e != 0.
             # Real logic would check if it's subnormal, but our _generate_target avoids them.
             ans_lead = prompt_input("")
@@ -112,6 +113,7 @@ class DecodeMode(BaseMode):
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             print("\nExiting mode context...\n")
-            return
+            return False

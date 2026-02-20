@@ -1,6 +1,6 @@
 import random
 from src.base_mode import BaseMode
-from src.ui import prompt_input, UserQuitException
+from src.ui import prompt_input, clear_screen, UserQuitException
 
 class RoundingMode(BaseMode):
     """Handles Mode 9: Rounding Modes."""
@@ -33,10 +33,11 @@ class RoundingMode(BaseMode):
             }
         ]
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target = random.choice(self.questions)
         
         try:
+            clear_screen()
             print("-" * 60)
             print("MODE 9: Rounding Modes")
             print("-" * 60)
@@ -49,9 +50,7 @@ class RoundingMode(BaseMode):
             print(f"Round bit: {target['r']}")
             print(f"Sticky bit: {target['s']} (Logical OR of all remaining bits)\n")
             
-            print("Using Round to Nearest, Ties to Even (Default mode):")
-            print("Should the 23rd bit of the fraction remain as-is (0) or round up (+1)?")
-            print("(Type '0' to truncate, '+1' to round up)")
+            print("Determine the rounding decision ('0' to truncate, '+1' to round up):")
             
             ans_dec = prompt_input("").strip()
             if ans_dec == target['decision']:
@@ -62,6 +61,7 @@ class RoundingMode(BaseMode):
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             print("\nExiting mode context...\n")
-            return
+            return False

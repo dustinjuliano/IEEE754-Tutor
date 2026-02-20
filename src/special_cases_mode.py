@@ -1,6 +1,6 @@
 import random
 from src.base_mode import BaseMode
-from src.ui import prompt_input, UserQuitException
+from src.ui import prompt_input, clear_screen, UserQuitException
 
 class SpecialCasesMode(BaseMode):
     """Handles Mode 6: Special Cases (NaN, INF, 0)."""
@@ -47,17 +47,18 @@ class SpecialCasesMode(BaseMode):
             }
         ]
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target = random.choice(self.questions)
         
         try:
+            clear_screen()
             print("-" * 60)
             print("MODE 6: Special Cases (32-bit)")
             print("-" * 60)
             print(f"Identify the required bit patterns for encoding: {target['name']}\n")
             
             # Step 1: Sign
-            print("Step 1: Sign Bit")
+            print("Step 1: Enter the sign bit (s):")
             ans_s = prompt_input("")
             if ans_s == target['sign']:
                 print("Correct.\n")
@@ -66,7 +67,7 @@ class SpecialCasesMode(BaseMode):
                 
             # Step 2: Exponent
             print("Step 2: Exponent Pattern")
-            print("Should the 8-bit exponent be all 0s, all 1s, or neither? (Type '0s', '1s', or 'N')")
+            print("Enter the exponent pattern ('0s', '1s', or 'N' for neither):")
             ans_e = prompt_input("").strip()
             if ans_e.lower() == target['exp'].lower() or \
                ans_e.lower() + "s" == target['exp'].lower(): # allow "0" for "0s"
@@ -76,7 +77,7 @@ class SpecialCasesMode(BaseMode):
                 
             # Step 3: Fraction
             print("Step 3: Fraction Pattern")
-            print("Should the 23-bit fraction be all 0s, or non-zero? (Type '0s' or 'NZ')")
+            print("Enter the fraction pattern ('0s' or 'NZ' for non-zero):")
             ans_f = prompt_input("").strip().upper()
             if ans_f == target['frac'] or ans_f + "s" == target['frac'] or ans_f + "S" == target['frac']:
                 print(f"Correct. ({'All 0s' if target['frac'] == '0s' else 'Non-Zero'})\n")
@@ -86,6 +87,7 @@ class SpecialCasesMode(BaseMode):
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             print("\nExiting mode context...\n")
-            return
+            return False

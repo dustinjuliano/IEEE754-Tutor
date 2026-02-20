@@ -23,7 +23,7 @@ class EncodeMode(BaseMode):
         frac = random.choice([0.0, 0.25, 0.5, 0.75, 0.125, 0.375, 0.625])
         return sign * (base + frac)
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target_val = self._generate_target()
         
         # Calculate ground truth
@@ -39,6 +39,7 @@ class EncodeMode(BaseMode):
         steps_correct = 0
         
         try:
+            clear_screen()
             print("-" * 60)
             print(f"MODE: {self.mode_name}")
             print("-" * 60)
@@ -46,10 +47,10 @@ class EncodeMode(BaseMode):
             
             # Step 1: Sign
             print("Step 1: Determine the Sign Bit (s)")
-            print("Is the number positive (0) or negative (1)?")
+            print("Enter the sign bit (s):")
             ans_s = prompt_input("")
             if ans_s == str(gt_s):
-                print(f"Correct. [s = {gt_s}]\n")
+                print(f"Correct. s = {gt_s}\n")
                 steps_correct += 1
             else:
                 print(f"Incorrect. The value is {'negative' if gt_s == 1 else 'positive'}, so s = {gt_s}.\n")
@@ -61,7 +62,7 @@ class EncodeMode(BaseMode):
             ans_e = prompt_input("")
             gt_e_bin = f"{gt_e:0{self.preset.e_bits}b}"
             if ans_e == gt_e_bin:
-                print(f"Correct. [e = {gt_e_bin}]\n")
+                print(f"Correct. e = {gt_e_bin}\n")
                 steps_correct += 1
             else:
                 print(f"Incorrect. The biased exponent is {gt_e}, which is {gt_e_bin} in binary.\n")
@@ -72,22 +73,23 @@ class EncodeMode(BaseMode):
             ans_f = prompt_input("")
             gt_f_bin = f"{gt_f:0{self.preset.f_bits}b}"
             if ans_f == gt_f_bin:
-                print(f"Correct. [f = {gt_f_bin}]\n")
+                print(f"Correct. f = {gt_f_bin}\n")
                 steps_correct += 1
             else:
                 print(f"Incorrect. The fraction bits are {gt_f_bin}.\n")
                 
             # Final Results
             print("Results:")
-            print(f"Sign:     [{gt_s}]")
-            print(f"Exponent: [{gt_e_bin}]")
-            print(f"Fraction: [{gt_f_bin}]")
+            print(f"Sign:     {gt_s}")
+            print(f"Exponent: {gt_e_bin}")
+            print(f"Fraction: {gt_f_bin}")
             print(f"Full Binary: {binary_str}\n")
             
                 
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             # We must record the attempted questions even if they quit mid-way?
             # The spec says "preserving grades correctly up to that point."
@@ -96,4 +98,4 @@ class EncodeMode(BaseMode):
             # unless they are completed, or we record as we go. We didn't call `record_attempt` 
             # as we went above, so let's call it individually per step in the real implementation.
             print("\nExiting mode context...\n")
-            return
+            return False

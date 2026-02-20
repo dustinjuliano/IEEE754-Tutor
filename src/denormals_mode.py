@@ -1,6 +1,6 @@
 import random
 from src.base_mode import BaseMode
-from src.ui import prompt_input, UserQuitException
+from src.ui import prompt_input, clear_screen, UserQuitException
 
 class DenormalsMode(BaseMode):
     """Handles Mode 7: Subnormals (Normalized vs Denormalized)."""
@@ -32,17 +32,18 @@ class DenormalsMode(BaseMode):
             }
         ]
 
-    def run_round(self) -> None:
+    def run_round(self) -> bool:
         target = random.choice(self.questions)
         
         try:
+            clear_screen()
             print("-" * 60)
             print("MODE 7: Subnormals")
             print("-" * 60)
             print(f"Analyze the sequence: {target['seq']}\n")
             
             # Step 1: Type
-            print("Is this value Normalized, Denormalized, or Special Case? (Type 'N', 'D', or 'S')")
+            print("Enter the value type ('N' for Normalized, 'D' for Denormalized, or 'S' for Special Case):")
             ans_type = prompt_input("").strip().upper()
             if ans_type == target['type']:
                 print(f"Correct. {target['reason']}\n")
@@ -55,7 +56,7 @@ class DenormalsMode(BaseMode):
                 return
 
             # Step 2: Leading Bit
-            print("What is the implicit leading bit (1 or 0)?")
+            print("Enter the implicit leading bit:")
             ans_lead = prompt_input("").strip()
             if ans_lead == target['lead']:
                 if ans_lead == "0":
@@ -66,8 +67,7 @@ class DenormalsMode(BaseMode):
                 print(f"Incorrect. The leading bit is {target['lead']}.\n")
                 
             # Step 3: Unbiased Exponent
-            print("What is the true (unbiased) exponent used for calculation (Bias=127)?")
-            print("(Hint: For denormals, true exp = 1 - bias)")
+            print("Enter the true (unbiased) exponent (Bias=127):")
             ans_exp = prompt_input("").strip()
             if ans_exp == target['bias_exp']:
                 print("Correct.\n")
@@ -77,6 +77,7 @@ class DenormalsMode(BaseMode):
             
             prompt_input("Press Enter to continue.")
             
+            return True
         except UserQuitException:
             print("\nExiting mode context...\n")
-            return
+            return False

@@ -35,6 +35,16 @@
         "tests/test_ui_bmc.py"
       ]
     },
+    "1.4": {
+      "description": "Continuous educational loop (modes present problems consecutively until 'q' is pressed).",
+      "implementation": [
+        "main.py",
+        "src/base_mode.py"
+      ],
+      "tests": [
+        "tests/test_loop_logic.py"
+      ]
+    },
     "2.1": {
       "description": "32-bit (Single Precision) Encoding (from decimal/scientific to binary).",
       "implementation": [
@@ -126,6 +136,21 @@
       ]
     },
     "3.1": {
+      "description": "Standardized interactive prompts (using direct directives to promote active recall).",
+      "implementation": [
+        "src/encode_mode.py",
+        "src/decode_mode.py",
+        "src/special_cases_mode.py",
+        "src/min_max_mode.py",
+        "src/denormals_mode.py",
+        "src/precision_impact.py",
+        "src/rounding_mode.py"
+      ],
+      "tests": [
+        "tests/test_modes.py"
+      ]
+    },
+    "3.2": {
       "description": "Step-by-step user guidance during encoding/decoding.",
       "implementation": [
         "src/encode_mode.py",

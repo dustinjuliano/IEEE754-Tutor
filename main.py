@@ -61,7 +61,8 @@ def main():
                 prompt_input("\nPress Enter to return to the menu.")
                 continue
                 
-            mode.run_round()
+            while mode.run_round():
+                pass
             
         except UserQuitException:
             print("\nExiting IEEE 754 Tutor. Goodbye!")
