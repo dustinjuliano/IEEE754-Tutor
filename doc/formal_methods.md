@@ -37,12 +37,6 @@ We will perform Bounded Model Checking on *every part* of the Python project to 
     *   Trace the execution path of slicing operations (e.g., `binary_str[1:9]`).
     *   **Assertions:** Prove that array indices never exceed bounds, that bitstring lengths are always strictly 32 or 64, and that bias arithmetic never underflows/overflows native Python capabilities unexpectedly.
 
-#### 2. Grading System (`ieee754.grading`)
-*   **What is checked:** Score accumulation, percentage calculations, and historical tracking.
-*   **BMC Approach:**
-    *   Create symbolic integers representing correct answers and total attempts.
-    *   **Assertions:** Prove that `attempts >= correct` always holds, that division by zero during percentage calculation is mathematically impossible (due to prior checks), and that cumulative percentages strictly remain within `[0.0, 100.0]`.
-
 #### 3. Educational Modes (`ieee754.modes.*`)
 *   **What is checked:** The state machines and logic sequences driving each interactive mode.
 *   **BMC Approach:**

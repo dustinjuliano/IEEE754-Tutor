@@ -52,7 +52,7 @@ class TestEverySingleDefinition(unittest.TestCase):
         
     @patch("sys.stdout.write")
     def test_ui_display_main_menu(self, mock_write):
-        display_main_menu({1: "Test Mode"}, {1: 100.0})
+        display_main_menu({1: "Test Mode"})
         self.assertTrue(mock_write.called)
         
     @patch("builtins.input", return_value="test")

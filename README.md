@@ -4,7 +4,7 @@ An interactive command-line application built entirely in Python designed to tra
 
 ## Features and Educational Modes
 
-Through nine specialized training modes, users learn to manually encode, decode, and interpret single and double-precision floats. A built-in scoring system tracks historical accuracy and provides immediate partial grading to reinforce active recall.
+Through nine specialized training modes, users learn to manually encode, decode, and interpret single and double-precision floats.
 
 1. **32-bit (Single) Encoding:** Convert decimals to 32-bit binary representation.
 2. **32-bit (Single) Decoding:** Convert 32-bit binary sequences back to decimal.
@@ -14,7 +14,7 @@ Through nine specialized training modes, users learn to manually encode, decode,
 6. **Special Cases:** Map patterns for NaNs, Infinity, and Zeros.
 7. **Subnormals (Normalized vs Denormalized):** Identify subnormal representations and calculate their un-biased exponents.
 8. **Precision Impact:** Observe how single bit flips at the least significant bit affect floating-point values via the Machine Epsilon.
-9. **Rounding Modes:** Practice applying IEEE 754 default rounding rules (Round to Nearest, Ties to Even) to infinitely repeating fractions using Guard, Round, and Sticky bits.
+9. **Rounding Modes:** Practice applying IEEE 754 default rounding methods (Round to Nearest, Ties to Even) to infinitely repeating fractions using Guard, Round, and Sticky bits.
 
 *Note: You can press `q` at any prompt to gracefully exit the current context and return to the main menu.*
 
@@ -24,18 +24,17 @@ Through nine specialized training modes, users learn to manually encode, decode,
 *   `run_tests.py`: The root test runner. Run via `python3 run_tests.py` to execute the functional and formal proofs.
 *   `src/ui.py`: Handles terminal clearing, display formatting, and user input validation (including the quit mechanism).
 *   `src/engine.py`: Contains the core bitwise algebraic functions for encoding/decoding and representing Float32/Float64 formats.
-*   `src/grading.py`: The `ScoreTracker` object, responsible for tracking accumulated attempts and correctly calculating percentages.
 *   `src/base_mode.py`: An abstract class providing the standard `run_round()` interface for all interactive modules.
 *   `src/*_mode.py` and `src/precision_impact.py`: The individual modules containing the procedural questions and logic for the 9 distinct educational modes.
 
 ## Testing & Formal Verification
 
-To verify computational correctness, this project uses layered testing approaches.
+To verify computational correctness and guarantee 100% functional code coverage, this project employs a rigorous, dual-layered testing methodology that combines traditional unit testing with advanced formal verification.
 
-**Dependencies:** Standard functional tests require no dependencies. If you wish to run the **Formal Verification** tests regarding Bounded Model Checking (BMC), it is the **user's responsibility to install the `z3-solver` module** (e.g., `pip install z3-solver`).
+**Dependencies:** Standard unit tests require no dependencies. If you wish to run the **Formal Verification** tests regarding Bounded Model Checking (BMC), it is the **user's responsibility to install the `z3-solver` module** (e.g., `pip install z3-solver`).
 
-1.  **Functional Testing:** Normal unit tests located in `tests/` ensure UI layout handling, core mathematics, and prompt flow constraints function smoothly. Run via `python3 run_tests.py`.
-2.  **Formal Verification (BMC):** Advanced symbolic execution models located in `tests/formal/` use the Z3 Theorem Prover to mathematically prove the integrity of grading percentage bounds and internal bit manipulation boundaries. Read `doc/formal_methods.md` and `doc/bmc_tutorial.md` for in-depth educational material on the verification strategies used.
+1.  **Unit Testing:** We maintain a comprehensive suite of standard unit tests located in `tests/` to ensure UI layout handling, core mathematics, and prompt flow constraints function smoothly under expected dynamic conditions. Run via `python3 run_tests.py`.
+2.  **Formal Verification (BMC):** In addition to unit testing, we achieve our 100% coverage guarantee using advanced symbolic execution models. Located in `tests/formal/`, these models use the Z3 Theorem Prover to mathematically prove the safety of the application and the integrity of internal bit manipulation boundaries across the entire possible input space. Read `doc/formal_methods.md` and `doc/bmc_tutorial.md` for in-depth educational material on the verification strategies used.
 
 ## AI Disclosure
 

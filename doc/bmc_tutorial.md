@@ -1,7 +1,7 @@
 # A Comprehensive Guide to Bounded Model Checking in Python using Z3
 ## Applied to the IEEE 754 Tutor Project
 
-This document serves as an in-depth, foundational tutorial on Bounded Model Checking (BMC) and how it is applied to rigorously verify 100% of the IEEE 754 Tutor codebase. It is designed for educational purposes, providing a deep dive into formal methods, symbolic execution, and the specific application of these techniques using the Z3 Theorem Prover.
+This document serves as an educational tutorial on Bounded Model Checking (BMC) and how it is applied to verify the functional logic of the IEEE 754 Tutor codebase. It provides an introduction into formal methods, symbolic execution, and the specific application of these techniques using the Z3 Theorem Prover.
 
 ---
 
@@ -130,16 +130,6 @@ def test_bmc_ui_prompt_state_machine():
 
 **Example Proof (UI Table Columns):**
 To ensure the main menu prints perfectly aligned columns for dynamic float values (like `100.0%` vs ` -- `), we model the structural length bounds using Z3 `Length()` properties over `StringVal`, proving string slices never cause misalignment.
-
-### 4.2 Checking the Grading Bounds (`ieee754.grading`)
-
-The grading system tracks user attempts and calculates percentages. A critical safety property is preventing `ZeroDivisionError` and ensuring the percentage never behaves non-deterministically.
-
-**BMC Strategy:**
-1.  **State Variables:** We declare Z3 integer bounds `correct_ratio_num` and `correct_ratio_denom`.
-2.  **Invariants:** The system architecture logic dictates that `attempts >= 0` and `0 <= correct <= attempts`. These are enforced as our algebraic bounds.
-3.  **Safety Assertion:** Ask Z3 to find a state where `get_cumulative_score()` returns an internal representation `< 0%` or `> 100%`.
-4.  **Result:** Z3 proves `UNSAT`, guaranteeing the grading boundary constraint holds permanently regardless of sequence.
 
 ### 4.3 Educational Mode Verification (`ieee754.modes.*`)
 

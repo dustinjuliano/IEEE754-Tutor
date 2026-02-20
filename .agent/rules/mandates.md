@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Project Mandates
 
 1. **Documentation Synchronization**: The root `README.md` file must be kept synchronized with changes to the project at all times. This includes keeping the features and descriptions, testing, and verification methods up to date.
@@ -10,4 +14,4 @@
    >> 
    ```
 6. **Binary String Presentation**: When displaying sequences of binary digits to the user for analysis, do not separate the fields (such as sign, exponent, fraction) with spaces. The binary strings must be contiguous to encourage active recall.
-7. **Formal Methods Documentation Synchronization**: The `doc/bmc_tutorial.md` and `doc/formal_methods.md` files MUST be kept synchronized with the project's actual usage of Z3 formal methods and Bounded Model Checking. If a new class of formal verification proof is built (such as string bounding or precision bit-flipping), the tutorial documentation must be updated accordingly to teach it.
+7. **Formal Methods Documentation Synchronization**: The `doc/bmc_tutorial.md` and `doc/formal_methods.md` and `doc/features.md` files MUST be kept synchronized with the project.

@@ -37,22 +37,16 @@ class TestUI(unittest.TestCase):
             2: "Mode Two",
             3: "Mode Three"
         }
-        scores = {
-            1: 85.5,
-            2: 0.0
-        }
         
         captured_out = io.StringIO()
         sys.stdout = captured_out
         try:
-            display_main_menu(modes, scores)
+            display_main_menu(modes)
         finally:
             sys.stdout = sys.__stdout__
             
         output = captured_out.getvalue()
         
-        self.assertIn("85.5%", output)
-        self.assertIn("  0.0%", output)
         self.assertIn("--", output)
         self.assertIn("1. Mode One", output)
         self.assertIn("2. Mode Two", output)

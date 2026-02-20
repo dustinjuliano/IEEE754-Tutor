@@ -1,6 +1,6 @@
 # Educational Modes & UI Mockups
 
-This document details the interface flow, grading steps, and UX for all 9 educational modes in the IEEE 754 Tutor.
+This document details the interface flow and UX for all 9 educational modes in the IEEE 754 Tutor.
 
 ---
 
@@ -34,7 +34,7 @@ Press `q` to exit.
 ## 1. 32-bit Encoding Mode (Decimal -> Binary)
 
 **Objective**: Convert a decimal number into its 32-bit binary IEEE 754 representation.
-**Grading**: Award partial points for correctly identifying Sign, Exponent, and Fraction sequences.
+
 
 ```text
 ------------------------------------------------------------
@@ -84,7 +84,7 @@ Press `q` to exit.
 ## 2. 32-bit Decoding Mode (Binary -> Decimal)
 
 **Objective**: Convert a given 32-bit sequence back to decimal representation.
-**Grading**: Award partial points for extracting fields and deriving values at each step.
+
 
 ```text
 ------------------------------------------------------------

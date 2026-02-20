@@ -3,8 +3,7 @@
 1. Application Core
    1.1. Interactive command line terminal interface.
    1.2. Main menu allowing mode selection.
-   1.3. Global accuracy tracking per mode displayed in a neat column format in the main menu.
-   1.4. Contextual exit mechanism (press 'q' to exit the current context and return to the previous, with the main menu resulting in quitting the program; 'q' instruction is briefed in prompts).
+   1.3. Contextual exit mechanism (press 'q' to exit the current context and return to the previous, with the main menu resulting in quitting the program; 'q' instruction is briefed in prompts).
 
 2. Educational Modes
    2.1. 32-bit (Single Precision) Encoding (from decimal/scientific to binary).
@@ -17,11 +16,8 @@
    2.8. Precision Impact (a proposed mode analyzing how single-bit flips impact the decoded value).
    2.9. Rounding Modes (a proposed mode practicing IEEE 754 rounding rules: to nearest, toward zero, toward +INF, toward -INF).
 
-3. Grading and Feedback
+3. User Guidance
    3.1. Step-by-step user guidance during encoding/decoding.
-   3.2. Partial grading for answers.
-   3.3. Current round accuracy displayed at the end of each round.
-   3.4. Cumulative (all rounds) accuracy displayed at the end of each round.
 
 4. Architecture & Compliance
    4.1. Extensible architecture to support new modes easily.
