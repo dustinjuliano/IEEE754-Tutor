@@ -31,12 +31,12 @@ Through nine specialized training modes, users learn to manually encode, decode,
 
 ## Testing & Formal Verification
 
-To verify computational correctness and guarantee 100% functional code coverage, this project employs a rigorous, dual-layered testing methodology that combines traditional unit testing with advanced formal verification.
+The project employs a rigorous, dual-layered testing methodology where functional correctness and formal safety are verified independently, ensuring extreme reliability.
 
-**Dependencies:** Standard unit tests require no dependencies. If you wish to run the **Formal Verification** tests regarding Bounded Model Checking (BMC), it is the **user's responsibility to install the `z3-solver` module** (e.g., `pip install z3-solver`).
+1.  **Functional Unit Testing (100% Coverage):** We maintain a suite of **71 functional unit tests** in `tests/` that achieves **100% coverage** of all logic, function calls, and input validations across the entire project. These tests simulate user interactions and verify the tutor's behavior autonomously from the formal methods. Run via `python3 run_tests.py`.
+2.  **Formal Verification (BMC):** Complementing the functional suite, we use **Bounded Model Checking** via the Z3 Theorem Prover. This suite of **11 formal verification models**, located in `tests/`, mathematically proves the integrity of the IEEE 754 conversion logic and system boundaries across the entire input space. Read `doc/formal_methods.md` for more details.
 
-1.  **Unit Testing:** We maintain a comprehensive suite of standard unit tests located in `tests/` to ensure UI layout handling, core mathematics, and prompt flow constraints function smoothly under expected dynamic conditions. Run via `python3 run_tests.py`.
-2.  **Formal Verification (BMC):** In addition to unit testing, we achieve our 100% coverage guarantee using advanced symbolic execution models. Located in `tests/formal/`, these models use the Z3 Theorem Prover to mathematically prove the safety of the application and the integrity of internal bit manipulation boundaries across the entire possible input space. Read `doc/formal_methods.md` and `doc/bmc_tutorial.md` for in-depth educational material on the verification strategies used.
+**Note:** Standard functional tests require no dependencies. Running the formal verification models requires the `z3-solver` module (`pip install z3-solver`). Total active test suite: **82 test cases**.
 
 ## AI Disclosure
 

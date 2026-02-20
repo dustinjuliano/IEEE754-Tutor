@@ -47,7 +47,7 @@ class TestUI(unittest.TestCase):
             
         output = captured_out.getvalue()
         
-        self.assertIn("--", output)
+        self.assertIn("IEEE 754 TUTOR TERMINAL", output)
         self.assertIn("1. Mode One", output)
         self.assertIn("2. Mode Two", output)
         self.assertIn("3. Mode Three", output)
@@ -56,3 +56,10 @@ class TestUI(unittest.TestCase):
         with patch('os.system') as mock_system:
             clear_screen()
             mock_system.assert_called_once()
+
+    def test_prompt_input_standard_prefix(self):
+        # UI Mandate: Press `q` to exit.
+        with patch('builtins.input', return_value='test'):
+            with patch('builtins.print') as mock_print:
+                prompt_input("message")
+                mock_print.assert_any_call("Press `q` to exit.")

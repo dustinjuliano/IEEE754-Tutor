@@ -52,3 +52,37 @@ class TestEngine(unittest.TestCase):
             bin32_to_float("0")
         with self.assertRaises(ValueError):
             bin64_to_float("0")
+
+    def test_special_values_float32(self):
+        # Infinity
+        inf_str = float_to_bin32(float('inf'))
+        self.assertEqual(inf_str, "0" + "1"*8 + "0"*23)
+        self.assertEqual(bin32_to_float(inf_str), float('inf'))
+        
+        # NaN
+        nan_str = float_to_bin32(float('nan'))
+        # struct.pack('>f', float('nan')) usually gives 0x7fc00000
+        self.assertEqual(nan_str[0:9], "011111111")
+        self.assertNotEqual(nan_str[9:], "0"*23)
+        self.assertTrue(math.isnan(bin32_to_float(nan_str)))
+
+    def test_special_values_float64(self):
+        # Infinity
+        inf_str = float_to_bin64(float('inf'))
+        self.assertEqual(inf_str, "0" + "1"*11 + "0"*52)
+        self.assertEqual(bin64_to_float(inf_str), float('inf'))
+        
+        # NaN
+        nan_str = float_to_bin64(float('nan'))
+        self.assertEqual(nan_str[0:12], "011111111111")
+        self.assertNotEqual(nan_str[12:], "0"*52)
+        self.assertTrue(math.isnan(bin64_to_float(nan_str)))
+
+    def test_extract_fields_no_fraction(self):
+        # Create a mock preset with 0 fraction bits to test the 'if f_str else 0' branch
+        from src.engine import IEEEPresets
+        tiny_preset = IEEEPresets(bias=1, e_bits=2, f_bits=0, total_bits=3)
+        s, e, f = extract_fields("110", tiny_preset)
+        self.assertEqual(s, 1)
+        self.assertEqual(e, 2)
+        self.assertEqual(f, 0)
