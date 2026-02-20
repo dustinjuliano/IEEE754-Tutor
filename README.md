@@ -41,7 +41,7 @@ The project employs a rigorous, dual-layered testing methodology where functiona
 ## AI Disclosure
 
 **AI Contributions:**
-The codebase, including the documentation, formal methods verification models and testing compliance matrices, were developed using Google Antigravity and Google Gemini 3.1 Pro using agentic workflows. All generated logic and architectures are verified using the dual functional and formal verification methods described above.
+The codebase, including the documentation, formal methods verification models and testing compliance matrices, were developed using Google Antigravity and Gemini Pro 3.1 + Gemini 3 Flash. All generated logic and architectures are verified using the dual functional and formal verification methods described above.
 
 **Human Contributions:**
 I designed the project, its requirements and scope, and supervised its development through numerous rounds of feedback and iteration.
