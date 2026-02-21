@@ -54,7 +54,10 @@ class PrecisionImpactMode(BaseMode):
                 else:
                     print("Correct. The magnitude increased and the number is negative.\n")
             else:
-                print(f"Incorrect. It was '{target['dir']}'.\n")
+                if target['dir'] == '+':
+                    print(f"Incorrect. Flipping a 0 to 1 increases the magnitude, and since the sign is positive (+), the value increases.\n")
+                else:
+                    print(f"Incorrect. Flipping a 0 to 1 increases the magnitude, but since the sign is negative (-), the value decreases further from zero.\n")
                 
             # Step 2: Epsilon Difference
             print("Enter the value of the machine epsilon for this exponent:")
@@ -62,7 +65,7 @@ class PrecisionImpactMode(BaseMode):
             if ans_diff == target['diff']:
                 print(f"Correct. The precision step at this exponent is {target['diff']}.\n")
             else:
-                print(f"Incorrect. It is {target['diff']}.\n")
+                print(f"Incorrect. The precision step is 2^(true exponent - fraction bits), which evaluates to {target['diff']}.\n")
             
 
             

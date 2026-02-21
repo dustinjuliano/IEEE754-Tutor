@@ -53,7 +53,7 @@ class EncodeMode(BaseMode):
                 print(f"Correct. s = {gt_s}\n")
                 steps_correct += 1
             else:
-                print(f"Incorrect. The value is {'negative' if gt_s == 1 else 'positive'}, so s = {gt_s}.\n")
+                print(f"Incorrect. The sign is 1 for negative and 0 for positive, so s = {gt_s}.\n")
                 
             # Step 2: Exponent
             print("Step 2: Determine the Exponent (e)")
@@ -65,7 +65,7 @@ class EncodeMode(BaseMode):
                 print(f"Correct. e = {gt_e_bin}\n")
                 steps_correct += 1
             else:
-                print(f"Incorrect. The biased exponent is {gt_e}, which is {gt_e_bin} in binary.\n")
+                print(f"Incorrect. The biased exponent is true exponent + bias ({self.preset.bias}), so {gt_e - self.preset.bias} + {self.preset.bias} = {gt_e} ({gt_e_bin} in binary).\n")
                 
             # Step 3: Fraction
             print("Step 3: Determine the Fraction (f)")
@@ -76,7 +76,7 @@ class EncodeMode(BaseMode):
                 print(f"Correct. f = {gt_f_bin}\n")
                 steps_correct += 1
             else:
-                print(f"Incorrect. The fraction bits are {gt_f_bin}.\n")
+                print(f"Incorrect. The fraction represents the digits after the binary point of the normalized value: {gt_f_bin}.\n")
                 
             # Final Results
             print("Results:")

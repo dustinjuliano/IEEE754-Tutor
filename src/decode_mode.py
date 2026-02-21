@@ -47,7 +47,7 @@ class DecodeMode(BaseMode):
             if ans_s == str(gt_s):
                 print(f"Correct. ({'Negative' if gt_s == 1 else 'Positive'})\n")
             else:
-                print(f"Incorrect. The value is {'Negative' if gt_s == 1 else 'Positive'}, so s = {gt_s}.\n")
+                print(f"Incorrect. The sign is 1 for negative and 0 for positive, so s = {gt_s}.\n")
                 
             # Step 1b: Exponent extraction
             gt_e_bin = f"{gt_e:0{self.preset.e_bits}b}"
@@ -56,7 +56,7 @@ class DecodeMode(BaseMode):
             if ans_e == gt_e_bin:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The bits are {gt_e_bin}.\n")
+                print(f"Incorrect. The exponent is the {self.preset.e_bits} bits following the sign bit: {gt_e_bin}.\n")
                 
             # Step 2: Exponent Value
             print("Step 2: Exponent Value")
@@ -72,7 +72,7 @@ class DecodeMode(BaseMode):
             if int_ans_e == gt_e:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The value is {gt_e}.\n")
+                print(f"Incorrect. The decimal value of the binary sequence {gt_e_bin} is {gt_e}.\n")
 
             unbiased_e = gt_e - self.preset.bias
             print(f"Enter the unbiased true exponent (bias={self.preset.bias}):")
@@ -87,7 +87,7 @@ class DecodeMode(BaseMode):
             if int_ans_ue == unbiased_e:
                 print(f"Correct. (True Exponent = {unbiased_e})\n")
             else:
-                print(f"Incorrect. True Exponent is {unbiased_e}.\n")
+                print(f"Incorrect. True exponent is biased exponent - bias ({self.preset.bias}), so {gt_e} - {self.preset.bias} = {unbiased_e}.\n")
                 
             # Step 3: Final Value
             print("Step 3: Final Value")
@@ -106,9 +106,9 @@ class DecodeMode(BaseMode):
                 if math.isclose(float(ans_dec), target_val, rel_tol=1e-5):
                     print("Correct.\n")
                 else:
-                    print(f"Incorrect. The final decimal value is {target_val}.\n")
+                    print(f"Incorrect. The value is (-1)^sign * (1 + fraction) * 2^(true exponent), so (-1)^{gt_s} * (1 + {gt_f / (2**self.preset.f_bits)}) * 2^{unbiased_e} = {target_val}.\n")
             except ValueError:
-                print(f"Incorrect format. The final decimal value is {target_val}.\n")
+                print(f"Incorrect format. The value is (-1)^sign * (1 + fraction) * 2^(true exponent), so {target_val}.\n")
 
             
             prompt_input("Press Enter to continue.")

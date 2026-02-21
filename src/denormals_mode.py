@@ -64,7 +64,10 @@ class DenormalsMode(BaseMode):
                 else:
                     print("Correct. Normalized values have an implicit leading 1.\n")
             else:
-                print(f"Incorrect. The leading bit is {target['lead']}.\n")
+                if target['lead'] == "0":
+                    print("Incorrect. Denormalized values have an implicit leading 0 because their exponent is minimum (0).\n")
+                else:
+                    print("Incorrect. Normalized values have an implicit leading 1 per the IEEE 754 standard.\n")
                 
             # Step 3: Unbiased Exponent
             print("Enter the true (unbiased) exponent (Bias=127):")
@@ -72,7 +75,10 @@ class DenormalsMode(BaseMode):
             if ans_exp == target['bias_exp']:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The true unbiased exponent is {target['bias_exp']}.\n")
+                if target['type'] == 'D':
+                    print(f"Incorrect. Subnormals have a fixed true exponent of 1 - bias (127), so 1 - 127 = {target['bias_exp']}.\n")
+                else:
+                    print(f"Incorrect. Normalized true exponent is biased exponent - bias (127), resulting in {target['bias_exp']}.\n")
             
             
             prompt_input("Press Enter to continue.")

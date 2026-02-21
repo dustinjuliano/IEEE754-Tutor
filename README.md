@@ -16,9 +16,7 @@ Through nine specialized training modes, users learn to manually encode, decode,
 8. **Precision Impact:** Observe how single bit flips at the least significant bit affect floating-point values via the Machine Epsilon.
 9. **Rounding Modes:** Practice applying IEEE 754 default rounding methods (Round to Nearest, Ties to Even) to infinitely repeating fractions using Guard, Round, and Sticky bits.
 
-**Continuous Learning:** All modes feature continuous loops, presenting a new problem immediately upon completion. Prompts are standardized as direct directives to encourage active recall of the IEEE 754 standard.
-
-*Note: You can press `q` at any prompt to gracefully exit the current context and return to the main menu.*
+**Continuous Training & Targeted Feedback:** All modes feature continuous training loops, presenting a new problem immediately upon completion. If you make a mistake on any step, the program provides **targeted feedback**, explaining the mathematical formulas and structural properties required for the correct answer.
 
 ## Project Structure
 
@@ -31,7 +29,7 @@ Through nine specialized training modes, users learn to manually encode, decode,
 
 ## Testing & Formal Verification
 
-The project employs a rigorous, dual-layered testing methodology where functional correctness and formal safety are verified independently, ensuring extreme reliability.
+The project employs both testing and formal methods.
 
 1.  **Functional Unit Testing (100% Coverage):** We maintain a suite of **71 functional unit tests** in `tests/` that achieves **100% coverage** of all logic, function calls, and input validations across the entire project. These tests simulate user interactions and verify the tutor's behavior autonomously from the formal methods. Run via `python3 run_tests.py`.
 2.  **Formal Verification (BMC):** Complementing the functional suite, we use **Bounded Model Checking** via the Z3 Theorem Prover. This suite of **11 formal verification models**, located in `tests/`, mathematically proves the integrity of the IEEE 754 conversion logic and system boundaries across the entire input space. Read `doc/formal_methods.md` for more details.
@@ -41,7 +39,7 @@ The project employs a rigorous, dual-layered testing methodology where functiona
 ## AI Disclosure
 
 **AI Contributions:**
-The codebase, including the documentation, formal methods verification models and testing compliance matrices, were developed using Google Antigravity and Gemini Pro 3.1 + Gemini 3 Flash. All generated logic and architectures are verified using the dual functional and formal verification methods described above.
+All documentation and code, sans minor human edits, were produced with Google Antigravity and Gemini Pro 3.1 + Gemini 3 Flash.
 
 **Human Contributions:**
-I designed the project, its requirements and scope, and supervised its development through numerous rounds of feedback and iteration.
+I designed the project and supervised its development through numerous rounds of feedback and iteration.

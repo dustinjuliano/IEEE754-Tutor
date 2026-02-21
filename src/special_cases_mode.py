@@ -63,7 +63,8 @@ class SpecialCasesMode(BaseMode):
             if ans_s == target['sign']:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The sign bit is {target['sign']}.\n")
+                explanation = "0 for positive" if target['sign'] == "0" else "1 for negative"
+                print(f"Incorrect. The sign revolves around {explanation}, so s = {target['sign']}.\n")
                 
             # Step 2: Exponent
             print("Step 2: Exponent Pattern")
@@ -73,7 +74,10 @@ class SpecialCasesMode(BaseMode):
                ans_e.lower() + "s" == target['exp'].lower(): # allow "0" for "0s"
                 print(f"Correct. (All {target['exp']})\n")
             else:
-                print(f"Incorrect. The pattern is {target['exp']}.\n")
+                if target['exp'] == "1s":
+                    print(f"Incorrect. Infinity and NaN require the maximum exponent of all 1s (255).\n")
+                else:
+                    print(f"Incorrect. Zero requires the minimum exponent of all 0s (0).\n")
                 
             # Step 3: Fraction
             print("Step 3: Fraction Pattern")
@@ -82,7 +86,10 @@ class SpecialCasesMode(BaseMode):
             if ans_f == target['frac'] or ans_f + "s" == target['frac'] or ans_f + "S" == target['frac']:
                 print(f"Correct. ({'All 0s' if target['frac'] == '0s' else 'Non-Zero'})\n")
             else:
-                print(f"Incorrect. The pattern is {target['frac']}.\n")
+                if target['frac'] == "0s":
+                    print(f"Incorrect. Infinity and Zero require empty fractions (all 0s) so they aren't parsed as NaN or subnormals.\n")
+                else:
+                    print(f"Incorrect. NaN requires a non-zero (NZ) fraction to distinguish it from Infinity.\n")
             
             
             prompt_input("Press Enter to continue.")

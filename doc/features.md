@@ -20,6 +20,7 @@
 3. User Guidance
    3.1. Standardized interactive prompts (using direct directives like "Enter the..." to promote active recall).
    3.2. Step-by-step user guidance during encoding/decoding.
+   3.3. Targeted error feedback: Single-sentence mathematical/structural explanations for incorrect answers to act as a virtual tutor.
 
 4. Architecture & Compliance
    4.1. Extensible architecture to support new modes easily.

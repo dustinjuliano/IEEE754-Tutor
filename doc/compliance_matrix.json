@@ -160,6 +160,21 @@
         "tests/test_modes.py"
       ]
     },
+    "3.3": {
+      "description": "Targeted error feedback: Single-sentence mathematical/structural explanations for incorrect answers to act as a virtual tutor.",
+      "implementation": [
+        "src/encode_mode.py",
+        "src/decode_mode.py",
+        "src/special_cases_mode.py",
+        "src/min_max_mode.py",
+        "src/denormals_mode.py",
+        "src/precision_impact.py",
+        "src/rounding_mode.py"
+      ],
+      "tests": [
+        "tests/test_modes.py"
+      ]
+    },
     "4.1": {
       "description": "Extensible architecture to support new modes easily.",
       "implementation": [

@@ -56,7 +56,7 @@ class RoundingMode(BaseMode):
             if ans_dec == target['decision']:
                 print(f"Correct. {target['reason']}\n")
             else:
-                print(f"Incorrect. {target['reason']} Decision is {target['decision']}.\n")
+                print(f"Incorrect. {target['reason']} so the decision is '{target['decision']}'.\n")
             
             
             prompt_input("Press Enter to continue.")

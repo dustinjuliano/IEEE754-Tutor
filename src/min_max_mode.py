@@ -53,7 +53,8 @@ class MinMaxMode(BaseMode):
             if ans_s == target['sign']:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The sign bit is {target['sign']}.\n")
+                explanation = "0 for positive" if target['sign'] == "0" else "1 for negative"
+                print(f"Incorrect. The sign revolves around {explanation}, so s = {target['sign']}.\n")
                 
             # Exponent
             print("Enter the exponent pattern (in binary):")
@@ -61,7 +62,12 @@ class MinMaxMode(BaseMode):
             if ans_e == target['exp']:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The pattern is {target['exp']}.\n")
+                if "Largest" in target['name']:
+                    exp_val = 254
+                    print(f"Incorrect. The largest valid exponent is all 1s except the LSB (254), representing a true exponent of {exp_val} - {self.preset.bias} = {exp_val - self.preset.bias}.\n")
+                else:
+                    exp_val = 1
+                    print(f"Incorrect. The smallest valid exponent is all 0s except the LSB (1), representing a true exponent of {exp_val} - {self.preset.bias} = {exp_val - self.preset.bias}.\n")
                 
             # Fraction
             print("Enter the fraction pattern (in binary):")
@@ -69,7 +75,10 @@ class MinMaxMode(BaseMode):
             if ans_f == target['frac']:
                 print("Correct.\n")
             else:
-                print(f"Incorrect. The pattern is {target['frac']}.\n")
+                if "Largest" in target['name']:
+                    print(f"Incorrect. The largest magnitude requires the largest fraction: all 1s ({target['frac']}).\n")
+                else:
+                    print(f"Incorrect. The smallest magnitude requires the smallest fraction: all 0s ({target['frac']}).\n")
             
             
             prompt_input("Press Enter to continue.")
