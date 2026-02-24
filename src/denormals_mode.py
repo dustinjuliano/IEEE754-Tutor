@@ -70,7 +70,7 @@ class DenormalsMode(BaseMode):
                     print("Incorrect. Normalized values have an implicit leading 1 per the IEEE 754 standard.\n")
                 
             # Step 3: Unbiased Exponent
-            print("Enter the true (unbiased) exponent (Bias=127):")
+            print("Enter the true (unbiased) exponent:")
             ans_exp = prompt_input("").strip()
             if ans_exp == target['bias_exp']:
                 print("Correct.\n")

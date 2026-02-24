@@ -75,7 +75,7 @@ class DecodeMode(BaseMode):
                 print(f"Incorrect. The decimal value of the binary sequence {gt_e_bin} is {gt_e}.\n")
 
             unbiased_e = gt_e - self.preset.bias
-            print(f"Enter the unbiased true exponent (bias={self.preset.bias}):")
+            print(f"Enter the unbiased true exponent:")
             while True:
                 ans_ue = prompt_input("")
                 try:

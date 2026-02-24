@@ -52,7 +52,7 @@ Step 2: Determine the Exponent (e)
 Convert the absolute value to binary: 13.625 -> 1101.101
 Normalize the binary value: 1.101101 x 2^3
 Calculate unbiased exponent: 3
-Calculate biased exponent (bias=127): 3 + 127 = 130
+Calculate biased exponent: 3 + 127 = 130
 Enter the 8-bit biased exponent in binary:
 Press `q` to exit.
 >> 10000010
@@ -108,7 +108,7 @@ What is the decimal value of the biased exponent `10000011`?
 Press `q` to exit.
 >> 131
 Correct.
-What is the unbiased true exponent (bias=127)?
+What is the unbiased true exponent?
 Press `q` to exit.
 >> 4
 Correct. (True Exponent = 4)
@@ -248,7 +248,7 @@ Press `q` to exit.
 >> 0
 Correct. Denormalized values have an implicit leading 0.
 
-What is the true (unbiased) exponent used for calculation (Bias=127)?
+What is the true (unbiased) exponent used for calculation?
 (Hint: For denormals, true exp = 1 - bias)
 Press `q` to exit.
 >> -126
